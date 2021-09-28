@@ -19,6 +19,10 @@ export const AuthProvider = ({ children }) => {
     return auth.signInWithEmailAndPassword(email, password);
   };
 
+  const logOut = () => {
+    return auth.signOut();
+  };
+
   const updatePerson = (displayName, photoURL) => {
     console.log("current user:", auth.currentUser);
     return auth.currentUser
@@ -47,6 +51,7 @@ export const AuthProvider = ({ children }) => {
     signUp,
     logIn,
     updatePerson,
+    logOut,
   };
 
   return (
