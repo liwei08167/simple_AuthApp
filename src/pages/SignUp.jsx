@@ -25,6 +25,9 @@ const useStyles = makeStyles({
   cardFooter: {
     marginTop: ".5rem",
   },
+  linkText: {
+    textDecoration: "none",
+  },
 });
 
 const validationSchema = yup.object({
@@ -79,10 +82,7 @@ const SignUp = (props) => {
               onSubmit={async (values, actions) => {
                 try {
                   await signUp(values.email, values.password);
-                  await updatePerson(
-                    values.userName,
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_2wyDsj13YUmKZdkNpkrBovwpMFpJSWXg_EoQmKGWa6jKs1gVzQLGe5y5WnDq69XwPjM&usqp=CAU"
-                  );
+                  await updatePerson(values.userName, "");
                   setLoading(true);
                   console.log(values);
                   props.history.push("/");
@@ -91,7 +91,6 @@ const SignUp = (props) => {
                   setErrorFromAuth(err.message);
                   console.log(err);
                 }
-
                 setLoading(false);
               }}
             >
@@ -132,7 +131,10 @@ const SignUp = (props) => {
           </CardContent>
         </Card>
         <div className={classes.cardFooter}>
-          Already have an account? <Link to="/login">Log In</Link>
+          Already have an account?{" "}
+          <Link className={classes.linkText} to="/login">
+            Log In
+          </Link>
         </div>
       </Grid>
     </Grid>

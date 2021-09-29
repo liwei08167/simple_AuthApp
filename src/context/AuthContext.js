@@ -23,8 +23,11 @@ export const AuthProvider = ({ children }) => {
     return auth.signOut();
   };
 
+  const resetPassword = (email) => {
+    return auth.sendPasswordResetEmail(email);
+  };
+
   const updatePerson = (displayName, photoURL) => {
-    console.log("current user:", auth.currentUser);
     return auth.currentUser
       .updateProfile({
         displayName,
@@ -52,6 +55,7 @@ export const AuthProvider = ({ children }) => {
     logIn,
     updatePerson,
     logOut,
+    resetPassword,
   };
 
   return (

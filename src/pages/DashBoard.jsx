@@ -36,8 +36,8 @@ const useStyles = makeStyles({
 const DashBoard = (props) => {
   const { currentUser, logOut } = useAuth();
   const { history } = useHistory();
-  const pig = useLocation();
-  console.log({ pig });
+  const location = useLocation();
+  console.log({ location, currentUser });
   const classes = useStyles();
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -64,7 +64,7 @@ const DashBoard = (props) => {
           <CardHeader
             avatar={
               <Avatar aria-label="Dashboard" className={classes.headerIcon}>
-                D
+                {currentUser?.displayName.charAt(0).toUpperCase()}
               </Avatar>
             }
             title={<h1 style={{ margin: "0" }}>Dashboard</h1>}

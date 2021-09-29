@@ -33,6 +33,9 @@ const useStyles = makeStyles({
   cardFooter: {
     marginTop: ".5rem",
   },
+  linkText: {
+    textDecoration: "none",
+  },
 });
 
 const validationSchema = yup.object({
@@ -109,7 +112,9 @@ const LogIn = (props) => {
                       Log In
                     </Button>
                     <div className={classes.forgetPsDiv}>
-                      <Link to="/forgot-password">Forgot Password?</Link>
+                      <Link to="/forgot-password" className={classes.linkText}>
+                        Forgot Password?
+                      </Link>
                     </div>
                   </Form>
                 );
@@ -118,7 +123,10 @@ const LogIn = (props) => {
           </CardContent>
         </Card>
         <div className={classes.cardFooter}>
-          Need an account? <Link to="/signup">Sign Up</Link>
+          Need an account?{" "}
+          <Link className={classes.linkText} to="/signup">
+            Sign Up
+          </Link>
         </div>
       </Grid>
     </Grid>
