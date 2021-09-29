@@ -9,7 +9,6 @@ import {
   Divider,
   Avatar,
   Typography,
-  Alert,
 } from "@mui/material";
 import { blue } from "@mui/material/colors";
 import { Link, useHistory, useLocation } from "react-router-dom";
@@ -19,7 +18,7 @@ import { useAuth } from "../context/AuthContext";
 const useStyles = makeStyles({
   headerIcon: {
     backgroundColor: blue[500],
-    color: blue[500],
+    color: "white",
   },
   submitBtn: {
     backgroundColor: blue[500],
@@ -30,6 +29,9 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "center",
     flexDirection: "column",
+  },
+  linkText: {
+    textDecoration: "none",
   },
 });
 
@@ -77,7 +79,7 @@ const DashBoard = (props) => {
             <Typography variant="body1" style={{ margin: "1rem 0" }}>
               Email: {currentUser && currentUser.email}
             </Typography>
-            <Link to="/update-profile">
+            <Link to="/update-profile" className={classes.linkText}>
               <Button
                 variant="contained"
                 className={classes.submitBtn}

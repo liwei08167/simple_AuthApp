@@ -53,7 +53,7 @@ const validationSchema = yup.object({
 const initValue = validationSchema.cast();
 
 const SignUp = (props) => {
-  const { signUp, currentUser, updatePerson } = useAuth();
+  const { signUp, updatePerson } = useAuth();
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
   const [errorFromAuth, setErrorFromAuth] = useState(null);
@@ -86,7 +86,6 @@ const SignUp = (props) => {
                   setLoading(true);
                   console.log(values);
                   props.history.push("/");
-                  actions.resetForm(initValue);
                 } catch (err) {
                   setErrorFromAuth(err.message);
                   console.log(err);

@@ -42,7 +42,6 @@ const validationSchema = yup.object({
 const initValue = validationSchema.cast();
 
 const ForgotPassword = (props) => {
-  console.log(props);
   const classes = useStyles();
   const { resetPassword } = useAuth();
   const [errorMsg, setErrorMsg] = useState("");

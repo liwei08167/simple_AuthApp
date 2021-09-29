@@ -34,40 +34,17 @@ const useStyles = makeStyles({
 });
 
 const validationSchema = yup.object({
-  email: yup.string().email().required().default(""),
+  email: yup.string().email().required(),
   userName: yup
     .string()
     .min(3, "please provide username longer then 3 letters!")
     .required(),
-
-  //   password: yup
-  //     .string()
-  //     .nullable()
-  //     .min(6, "should be min 6 characters")
-  //     .transform((_, val) => {
-  //       return val === "" ? null : val;
-  //     })
-  //    ,
-  //   confirmPassword: yup
-  //     .string()
-  //     .oneOf([yup.ref("password"), null], "passwords don't match")
-  //     .nullable()
-  //     .min(6, "should be min 6 characters")
-  //     .transform((_, val) => {
-  //       return val === "" ? null : val;
-  //     })
-  //     ,
 });
 
-const initValue = validationSchema.cast();
-
 const UpdateProfile = (props) => {
-  console.log(props);
   const classes = useStyles();
   const { updateEmail, updatePerson, currentUser } = useAuth();
   const [errorMsg, setErrorMsg] = useState("");
-
-  console.log({ currentUser });
 
   return (
     <Grid
@@ -128,13 +105,6 @@ const UpdateProfile = (props) => {
                       type="text"
                       placeholder="hello@hello.com"
                     />
-
-                    {/* <MyForm label="Password" name="password" type="Password" />
-                    <MyForm
-                      label="Confirm Password"
-                      name="confirmPassword"
-                      type="Password"
-                    /> */}
 
                     <Button
                       variant="contained"

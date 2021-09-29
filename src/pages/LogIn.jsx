@@ -18,10 +18,6 @@ import { useAuth } from "../context/AuthContext";
 import MyForm from "../components/MyForm";
 
 const useStyles = makeStyles({
-  // headerIcon: {
-  //   backgroundColor: (props) => `${blue[500]}!important`,
-  //   color: blue[500],
-  // },
   submitBtn: {
     backgroundColor: blue[500],
     color: "white",
