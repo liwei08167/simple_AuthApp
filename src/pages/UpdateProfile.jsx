@@ -8,6 +8,7 @@ import {
   Grid,
   Divider,
   Alert,
+  Avatar,
 } from "@mui/material";
 import { Formik, Form } from "formik";
 import { blue } from "@mui/material/colors";
@@ -18,18 +19,12 @@ import { useAuth } from "../context/AuthContext";
 import MyForm from "../components/MyForm";
 
 const useStyles = makeStyles({
-  // headerIcon: {
-  //   backgroundColor: (props) => `${blue[500]}!important`,
-  //   color: blue[500],
-  // },
   submitBtn: {
     backgroundColor: blue[500],
     color: "white",
+    marginTop: "2rem",
   },
-  forgetPsDiv: {
-    textAlign: "center",
-    marginTop: "1rem",
-  },
+
   cardFooter: {
     marginTop: ".5rem",
   },
@@ -40,20 +35,39 @@ const useStyles = makeStyles({
 
 const validationSchema = yup.object({
   email: yup.string().email().required().default(""),
-  password: yup
+  userName: yup
     .string()
-    .min(6, "should be min 6 characters")
-    .required()
-    .default(""),
+    .min(3, "please provide username longer then 3 letters!")
+    .required(),
+
+  //   password: yup
+  //     .string()
+  //     .nullable()
+  //     .min(6, "should be min 6 characters")
+  //     .transform((_, val) => {
+  //       return val === "" ? null : val;
+  //     })
+  //    ,
+  //   confirmPassword: yup
+  //     .string()
+  //     .oneOf([yup.ref("password"), null], "passwords don't match")
+  //     .nullable()
+  //     .min(6, "should be min 6 characters")
+  //     .transform((_, val) => {
+  //       return val === "" ? null : val;
+  //     })
+  //     ,
 });
 
 const initValue = validationSchema.cast();
 
-const LogIn = (props) => {
+const UpdateProfile = (props) => {
   console.log(props);
   const classes = useStyles();
-  const { logIn } = useAuth();
+  const { updateEmail, updatePerson, currentUser } = useAuth();
   const [errorMsg, setErrorMsg] = useState("");
+
+  console.log({ currentUser });
 
   return (
     <Grid
@@ -67,20 +81,33 @@ const LogIn = (props) => {
       <Grid item xs={6} lg={4}>
         <Card>
           <CardHeader
-            title={<h3 style={{ margin: "0" }}>Log In</h3>}
-            subheader="please enter your details here"
+            avatar={
+              <Avatar aria-label="Dashboard" className={classes.headerIcon}>
+                {currentUser?.displayName.charAt(0).toUpperCase()}
+              </Avatar>
+            }
+            title={<h3 style={{ margin: "0" }}>Update Profile</h3>}
+            subheader="please enter your new email and/or new password below"
           />
           <Divider />
           <CardContent>
             <Formik
-              initialValues={initValue}
+              initialValues={{
+                userName: currentUser?.displayName,
+                email: currentUser?.email,
+              }}
               validationSchema={validationSchema}
               onSubmit={async (values, actions) => {
                 try {
-                  await logIn(values.email, values.password);
-                  console.log(values);
+                  if (values.email !== currentUser.email) {
+                    await updateEmail(values.email);
+                  }
+
+                  if (values.userName !== currentUser.displayName) {
+                    await updatePerson(values.userName, "");
+                  }
                   props.history.push("/");
-                  actions.resetForm(initValue);
+                  console.log({ values });
                 } catch (err) {
                   setErrorMsg(err.message);
                   console.log(err);
@@ -93,6 +120,7 @@ const LogIn = (props) => {
                     {errorMsg !== "" && (
                       <Alert severity="warning">{errorMsg}</Alert>
                     )}
+                    <MyForm label="User Name" name="userName" type="text" />
 
                     <MyForm
                       label="Email"
@@ -100,22 +128,23 @@ const LogIn = (props) => {
                       type="text"
                       placeholder="hello@hello.com"
                     />
-                    <MyForm label="Password" name="password" type="Password" />
+
+                    {/* <MyForm label="Password" name="password" type="Password" />
+                    <MyForm
+                      label="Confirm Password"
+                      name="confirmPassword"
+                      type="Password"
+                    /> */}
 
                     <Button
                       variant="contained"
-                      className={classes.submitBtn}
+                      sx={{ marginTop: "1rem" }}
                       size="small"
                       fullWidth
                       type="submit"
                     >
-                      Log In
+                      Update Profile
                     </Button>
-                    <div className={classes.forgetPsDiv}>
-                      <Link to="/forgot-password" className={classes.linkText}>
-                        Forgot Password?
-                      </Link>
-                    </div>
                   </Form>
                 );
               }}
@@ -123,9 +152,8 @@ const LogIn = (props) => {
           </CardContent>
         </Card>
         <div className={classes.cardFooter}>
-          Need an account?{" "}
-          <Link className={classes.linkText} to="/signup">
-            Sign Up
+          <Link className={classes.linkText} to="/">
+            Cancel
           </Link>
         </div>
       </Grid>
@@ -133,4 +161,4 @@ const LogIn = (props) => {
   );
 };
 
-export default LogIn;
+export default UpdateProfile;

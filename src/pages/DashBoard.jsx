@@ -77,15 +77,17 @@ const DashBoard = (props) => {
             <Typography variant="body1" style={{ margin: "1rem 0" }}>
               Email: {currentUser && currentUser.email}
             </Typography>
-            <Button
-              variant="contained"
-              className={classes.submitBtn}
-              size="small"
-              fullWidth
-              // onClick={() => updatePerson("HAPPY PIGS22", null)}
-            >
-              Update Profile
-            </Button>
+            <Link to="/update-profile">
+              <Button
+                variant="contained"
+                className={classes.submitBtn}
+                size="small"
+                fullWidth
+              >
+                {" "}
+                Update Profile
+              </Button>
+            </Link>
           </CardContent>
         </Card>
         <div style={{ marginTop: ".5rem" }}>

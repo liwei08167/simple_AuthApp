@@ -8,6 +8,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import { AuthProvider } from "./context/AuthContext";
 import { NotFound } from "./pages/NotFound";
 import PrivateRoute from "./components/PrivateRoute";
+import UpdateProfile from "./pages/UpdateProfile";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <AuthProvider>
           <Switch>
             <PrivateRoute exact path="/" component={DashBoard} />
+            <PrivateRoute path="/update-profile" component={UpdateProfile} />
             <Route path="/signup" component={SignUp} />
             <Route path="/login" component={LogIn} />
             <Route path="/forgot-password" component={ForgotPassword} />

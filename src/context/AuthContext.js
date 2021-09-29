@@ -28,25 +28,14 @@ export const AuthProvider = ({ children }) => {
   };
 
   const updatePerson = (displayName, photoURL) => {
-    return auth.currentUser
-      .updateProfile({
-        displayName,
-        photoURL,
-      })
-      .then(() => {
-        console.log(currentUser.providerData);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    return auth.currentUser.updateProfile({
+      displayName,
+      photoURL,
+    });
   };
 
   const updateEmail = (email) => {
     return currentUser.updateEmail(email);
-  };
-
-  const updatePassword = (email) => {
-    return currentUser.updatePassword(email);
   };
 
   useEffect(() => {
@@ -61,11 +50,10 @@ export const AuthProvider = ({ children }) => {
     currentUser,
     signUp,
     logIn,
-    updatePerson,
     logOut,
     resetPassword,
+    updatePerson,
     updateEmail,
-    updatePassword,
   };
 
   return (
