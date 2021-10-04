@@ -9,7 +9,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) => {
-        console.log({ props });
         return currentUser ? (
           <Component {...props} />
         ) : (

@@ -1,3 +1,13 @@
+## Tech used:
+
+React, hooks, useContext hook, material-ui, react-router and firebase for authentication backend.
+
+## User tips:
+
+Start with signing up with any (fake and random) email account, then you could see dashboard where shows your username and email, here you can also update your username and email.
+
+you could also use https://temp-mail.org/en/ to create a temp email account, and if you forgot your password, then firebase will send an email with password changing link to your temp email account.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@mui/styles";
 import {
   Card,
@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { blue } from "@mui/material/colors";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { useAuth } from "../context/AuthContext";
 
@@ -38,8 +38,7 @@ const useStyles = makeStyles({
 const DashBoard = (props) => {
   const { currentUser, logOut } = useAuth();
   const { history } = useHistory();
-  const location = useLocation();
-  console.log({ location, currentUser });
+
   const classes = useStyles();
   const [errorMsg, setErrorMsg] = useState("");
 

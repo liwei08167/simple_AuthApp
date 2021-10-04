@@ -57,7 +57,6 @@ const SignUp = (props) => {
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
   const [errorFromAuth, setErrorFromAuth] = useState(null);
-  console.log(initValue.userName);
 
   return (
     <Grid

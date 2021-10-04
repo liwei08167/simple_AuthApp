@@ -46,7 +46,6 @@ const validationSchema = yup.object({
 const initValue = validationSchema.cast();
 
 const LogIn = (props) => {
-  console.log(props);
   const classes = useStyles();
   const { logIn } = useAuth();
   const [errorMsg, setErrorMsg] = useState("");
